@@ -143,7 +143,6 @@ where total_sale > (select q3 + 1.5*irl from irl)
 
 ## 3 Exploratory Data Analysis (EDA):
 
-My Analysis & Findings
 Q.1 Write a SQL query to retrieve all columns for sales made on '11/05/2022'
 ```sql
 Select total_sale 
