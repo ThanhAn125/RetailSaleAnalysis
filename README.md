@@ -5,7 +5,7 @@
 3. **Exploratory Data Analysis (EDA)**: Exploratory data analysis to understand the dataset.
 
 ## 1 Create DataBase:
-
+```sql
 Drop table if exists sale_table;
 Create Table sale_table(
 	transactions_id	int primary key,
@@ -22,9 +22,11 @@ Create Table sale_table(
 );
 
 Select * from sale_table;
-
+```
 ## 2 Data Cleaning
 1. ** Identify and remove missing or null data:
+
+```sql
 --Check Null data
 Select * 
 From sale_table
@@ -55,4 +57,4 @@ Where  transactions_id is null
 	or cogs is null
 	or total_sale is null
 ;
-
+```
