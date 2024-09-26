@@ -18,12 +18,9 @@ Create Table sale_table(
 
 Select * from sale_table;
  --Check Null data
-
- select cast(sale_date as date) from sale_table
-
-select * 
-from sale_table
-where transactions_id is null
+Select * 
+From sale_table
+Where transactions_id is null
 	or sale_date is null
 	or sale_time is null
 	or customer_id is null
@@ -38,7 +35,7 @@ where transactions_id is null
 
 --Delete Null data
 Delete From sale_table
-where  transactions_id is null
+Where  transactions_id is null
 	or sale_date is null
 	or sale_time is null
 	or customer_id is null
