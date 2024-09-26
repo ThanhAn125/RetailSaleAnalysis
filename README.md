@@ -142,6 +142,93 @@ where total_sale > (select q3 + 1.5*irl from irl)
 ```
 
 ## 3 Exploratory Data Analysis (EDA):
+```sql
+
+-- My Analysis & Findings
+-- Q.1 Write a SQL query to retrieve all columns for sales made on '11/05/2022'
+Select total_sale 
+From sale_table
+where sale_date like '%11/05/2022'
+;
+
+-- Q.2 Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 2 in the month of Nov-2022
+Select * 
+From sale_table
+Where category = 'Clothing' and quantity > 2
+;
+
+-- Q.3 Write a SQL query to calculate the total sales (total_sale) for each category.
+Select category, sum(total_sale) 
+From sale_table
+group by category
+;
+
+-- Q.4 Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.
+Select avg(age) 
+From sale_table
+Where category like '%beauty%'
+;
+
+-- Q.5 Write a SQL query to find all transactions where the total_sale is greater than 1000.
+Select * 
+From sale_table
+Where total_sale > 1000
+;
+
+-- Q.6 Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.
+Select gender,Count(*) as TotalOrder
+From sale_table
+Group by gender
+;
+
+-- Q.7 Write a SQL query to calculate the average sale for each month. Find out best selling month in each year
+With T1 as (
+Select Datepart(yyyy,sale_date) as Years,
+	   Datepart(mm,sale_date) as Months,
+	   Avg(total_sale) as Avg_sale,
+	   Rank() over (Partition by Datepart(yyyy,sale_date) Order by avg(total_sale) DESC) as Ranks
+from sale_table
+Group by Datepart(yyyy,sale_date),Datepart(mm,sale_date) )
+Select 
+	*
+from T1
+Where Ranks = 1
+;
+
+-- Q.8 Write a SQL query to find the top 5 customers based on the highest total sales 
+Select top(5) 
+	customer_id, 
+	sum(total_sale) as totalsale
+From sale_table
+Group by customer_id
+Order by totalsale DESC
+;
+
+-- Q.9 Write a SQL query to find the number of unique customers who purchased items from each category.
+Select category, 
+	count(distinct(customer_id)) as TotalCustomerPurchased
+From sale_table
+Group by category
+;
+
+-- Q.10 Write a SQL query to create each shift and number of orders (Example Morning <=12, Afternoon Between 12 & 17, Evening >17)
+With hourly_sale 
+as
+(
+Select
+	*,
+	Case
+	when datepart(hh,sale_time) <=12 then 'Morning'
+	when datepart(hh,sale_time) BETWEEN 12 and 17 then 'Afternoon'
+	when datepart(hh,sale_time) >17 then 'Evening'
+	End as DateShift
+From sale_table)
+Select 
+	DateShift,
+	Count(*) as TotalSale
+from hourly_sale
+Group by DateShift
+;
 
 
 
