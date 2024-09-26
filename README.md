@@ -5,6 +5,7 @@
 3. **Exploratory Data Analysis (EDA)**: Exploratory data analysis to understand the dataset.
 
 ## 1 Create DataBase:
+Schema:
 ```sql
 Drop table if exists sale_table;
 Create Table sale_table(
@@ -24,7 +25,7 @@ Create Table sale_table(
 Select * from sale_table;
 ```
 ## 2 Data Cleaning
-1. ** Identify and remove missing or null data:
+1. ** Identify and remove missing or null data **:
 
 ```sql
 --Check Null data
@@ -58,3 +59,4 @@ Where  transactions_id is null
 	or total_sale is null
 ;
 ```
+2. ** Identify and remove duplicate data **:
