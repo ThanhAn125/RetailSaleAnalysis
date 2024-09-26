@@ -128,8 +128,6 @@ where total_sale > (select q3 + 1.5*irl from irl)
 	or total_sale < (select q1 - 1.5*irl from irl)
 -- No outlier in Total_sale column
 
-select sale_date from sale_table order by sale_date
-
 -- My Analysis & Findings
 -- Q.1 Write a SQL query to retrieve all columns for sales made on '11/05/2022'
 Select total_sale 
